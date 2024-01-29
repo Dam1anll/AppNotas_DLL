@@ -50,17 +50,11 @@ namespace AppNotas_DLL.ViewModels.VMnota
             nuevosDatos.Titulo = TxtTitulo;
             nuevosDatos.Texto = TxtTexto;
 
-            if (DatosEditados(nuevosDatos))
-            {
-                await funcion.EditarNota(nuevosDatos);
-                await Volver();
-                MessagingCenter.Send(this, "NotasActualizadas");
-                NotaEditadaCorrectamente?.Invoke(this, "Nota editada correctamente");
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Advertencia", "Realiza cambios antes de editar la nota.", "OK");
-            }
+            await funcion.EditarNota(nuevosDatos);
+            await Volver();
+            MessagingCenter.Send(this, "NotasActualizadas");
+            NotaEditadaCorrectamente?.Invoke(this, "Nota editada correctamente");
+
         }
 
         private bool DatosEditados(NotaModelo nuevosDatos)

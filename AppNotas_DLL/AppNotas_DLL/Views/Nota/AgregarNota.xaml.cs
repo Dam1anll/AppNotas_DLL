@@ -31,7 +31,7 @@ namespace AppNotas_DLL.Views.Nota
         private void MaxText(object sender, TextChangedEventArgs e)
         {
             var editor = (Editor)sender;
-            var maxCharactersPerLine = 20; 
+            var maxCharactersPerLine = 30; 
             var lines = editor.Text.Split('\n');
 
             for (int i = 0; i < lines.Length; i++)
