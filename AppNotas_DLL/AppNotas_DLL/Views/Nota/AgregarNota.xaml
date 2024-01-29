@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppNotas_DLL.Views.Nota.AgregarNota"
+             NavigationPage.HasNavigationBar="False">
+    
+    <Grid RowDefinitions="80,*"
+          BackgroundColor="#000000">
+        <StackLayout Orientation="Horizontal" Padding="15,0,0,0" BackgroundColor="#0A0A0A">
+            <Image Source="https://i.ibb.co/t3vDfms/flecha-izquierda.png" WidthRequest="30">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding VolverCommand}"/>
+                </Image.GestureRecognizers>
+
+            </Image>
+            <Label Text="NOTAS"
+                Margin="60,0,0,0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                FontSize="40"
+                FontAttributes="Bold"
+                TextColor="White"/>
+
+        </StackLayout>
+        <StackLayout Grid.Row="1" Margin="10">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Titulo: "
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       FontSize="18"/>
+                <Entry Placeholder="Ingrese el titulo"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       PlaceholderColor="White"
+                       TextTransform="Lowercase"
+                       HorizontalOptions="StartAndExpand"
+                       Text="{Binding TxtTitulo}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Texto: "
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       FontSize="18"/>
+                <Editor Placeholder="Ingrese una descripcion"
+                            FontAttributes="Bold"
+                            x:Name="miEditor"
+                            TextColor="White"
+                            PlaceholderColor="White"
+                            VerticalOptions="StartAndExpand"
+                            HorizontalOptions="FillAndExpand" 
+                            AutoSize="TextChanges"
+                            Text="{Binding TxtTexto}"
+                            TextChanged="MaxText"/>
+            </StackLayout>
+            <Frame HorizontalOptions="Center"
+                   Padding="6"
+                   Margin="0,10,0,0"
+                   CornerRadius="15"
+                   HasShadow="False"
+                   BackgroundColor="#307AF7">
+                <Button Text="Agregar"
+                        HorizontalOptions="Center"
+                        BackgroundColor="#307AF7"
+                        BorderWidth="6"
+                        CornerRadius="15"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        WidthRequest="130"
+                        HeightRequest="60"
+                        Command="{Binding AgregarCommand}"/>
+            </Frame>
+        </StackLayout>
+    </Grid>
+</ContentPage>

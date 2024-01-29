@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppNotas_DLL.Views.Nota.GestionNota"
+             NavigationPage.HasNavigationBar="False">
+    
+    <Grid RowDefinitions="80,*"
+          BackgroundColor="#000000">
+        <StackLayout Orientation="Horizontal" Padding="15,0,0,0" BackgroundColor="#0A0A0A">
+            <Image Source="https://i.ibb.co/t3vDfms/flecha-izquierda.png" WidthRequest="30">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding VolverCommand}"/>
+                </Image.GestureRecognizers>
+
+            </Image>
+            <Label Text="NOTAS"
+                Margin="60,0,0,0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                FontSize="40"
+                FontAttributes="Bold"
+                TextColor="White"/>
+
+        </StackLayout>
+        <StackLayout Grid.Row="1" Margin="10">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Titulo: "
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       FontSize="18"/>
+                <Entry Placeholder="Ingrese el titulo"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       PlaceholderColor="White"
+                       TextTransform="Lowercase"
+                       HorizontalOptions="StartAndExpand"
+                       Text="{Binding _nota.Titulo}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Texto: "
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       FontSize="18"/>
+                <Editor Placeholder="Ingrese una descripcion"
+                            FontAttributes="Bold"
+                            x:Name="miEditor"
+                            TextColor="White"
+                            PlaceholderColor="White"
+                            VerticalOptions="StartAndExpand"
+                            HorizontalOptions="FillAndExpand" 
+                            AutoSize="TextChanges"
+                            Text="{Binding _nota.Texto}"
+                            TextChanged="MaxText"/>
+            </StackLayout>
+            <StackLayout Margin="0,10,0,0" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button
+                    Text="Eliminar"
+                    HorizontalOptions="Center"
+                    BackgroundColor="#307AF7"
+                    CornerRadius="15"
+                    FontSize="15"
+                    WidthRequest="130"
+                    HeightRequest="60"
+                    Margin="0,0,10,0"
+                    Command="{Binding EliminarCommand}"/>
+                <Button
+                    Text="Editar"
+                    HorizontalOptions="Center"
+                    BackgroundColor="#307AF7"
+                    CornerRadius="15"
+                    FontSize="15"
+                    WidthRequest="130"
+                    HeightRequest="50"
+                    Command="{Binding EditarCommand}"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>
+

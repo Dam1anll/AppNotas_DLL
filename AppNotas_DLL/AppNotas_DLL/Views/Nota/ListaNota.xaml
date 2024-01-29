@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppNotas_DLL.Views.Nota.ListaNota"
+             NavigationPage.HasNavigationBar="False">
+
+
+    <Grid RowDefinitions="60, *"
+          BackgroundColor="#000000">
+        <Label Text="NOTAS"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
+              FontSize="40"
+              FontAttributes="Bold"
+              TextColor="#DCDCDC"
+              Margin="0,15,0,0"/>
+        <CollectionView BackgroundColor="#000000"
+                Grid.Row="1"
+                ItemsSource="{Binding ListaNota}"
+                x:Name="gestion"
+                SelectionMode="Multiple">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid RowDefinitions="100, *" Margin="0,0,0,0">
+                        <Frame x:Name="notaFrame" Grid.Row="1" WidthRequest="300"
+                       Grid.ColumnSpan="2" HorizontalOptions="Center"
+                       CornerRadius="15" Margin="2,-80,2,0">
+                            <StackLayout Margin="0,0,0,0">
+                                <Label Text="{Binding Titulo}" TextColor="#ECECEC" FontSize="20"/>
+                                <Label Text="{Binding Texto}" TextColor="#999B9A" FontSize="15"/>
+                            </StackLayout>
+                        </Frame>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Path=BindingContext.IraGestionCommand, Source={x:Reference gestion}}" CommandParameter="{Binding .}"/>
+                            <TapGestureRecognizer Command="{Binding Path=BindingContext.SeleccionarNotaCommand, Source={x:Reference gestion}}" CommandParameter="{Binding .}" NumberOfTapsRequired="2"/>
+                        </Grid.GestureRecognizers>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Frame.BackgroundColor" Value="#212224" TargetName="notaFrame"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Agregado">
+                                        <VisualState.Setters>
+                                            <Setter Property="Frame.BackgroundColor" Value="Green" TargetName="notaFrame"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Eliminado">
+                                        <VisualState.Setters>
+                                            <Setter Property="Frame.BackgroundColor" Value="Red" TargetName="notaFrame"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Seleccionado">
+                                        <VisualState.Setters>
+                                            <Setter Property="Frame.BackgroundColor" Value="Yellow" TargetName="notaFrame"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="+"
+                Grid.Row="1"
+                HeightRequest="70"
+                WidthRequest="100"
+                VerticalOptions="End"
+                CornerRadius="100"
+                Margin="250,0,30,30"
+                FontSize="30"
+                TextColor="#FFFFFF"
+                FontAttributes="Bold"
+                BackgroundColor="#307AF7"
+                Command="{Binding IraAgregarCommand}"/>
+        <Button Text="X"
+        Grid.Row="1"
+        HeightRequest="70"
+        WidthRequest="100"
+        VerticalOptions="End"
+        CornerRadius="100"
+        Margin="30,0,250,30"
+        FontSize="18"
+        TextColor="#FFFFFF"
+        FontAttributes="Bold"
+        BackgroundColor="#FF0000"
+        Command="{Binding EliminarNotasSeleccionadasCommand}"/>
+    </Grid>
+</ContentPage>
