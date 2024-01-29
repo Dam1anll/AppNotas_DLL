@@ -33,7 +33,6 @@
                        FontAttributes="Bold"
                        TextColor="White"
                        PlaceholderColor="White"
-                       TextTransform="Lowercase"
                        HorizontalOptions="StartAndExpand"
                        Text="{Binding _nota.Titulo}"/>
             </StackLayout>

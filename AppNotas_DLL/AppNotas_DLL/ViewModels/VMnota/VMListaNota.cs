@@ -19,6 +19,7 @@ namespace AppNotas_DLL.ViewModels.VMnota
         #region VARIABLES
         private ObservableCollection<NotaModelo> _listaNota;
         private ObservableCollection<NotaModelo> _notasSeleccionadas;
+        public event EventHandler<string> NotasBorradasCorrectamente;
         #endregion
         #region CONTRUCTOR 
         public VMListaNota(INavigation navigation) 
@@ -35,11 +36,7 @@ namespace AppNotas_DLL.ViewModels.VMnota
         public ObservableCollection<NotaModelo> ListaNota 
         {
             get { return _listaNota; }
-            set 
-            {
-                SetValue(ref _listaNota, value);
-                OnPropertyChanged();
-            }
+            set { SetValue(ref _listaNota, value); }
         }
         public ObservableCollection<NotaModelo> NotasSeleccionadas
         {
@@ -73,15 +70,13 @@ namespace AppNotas_DLL.ViewModels.VMnota
                 NotasSeleccionadas.Add(nota);
             }
 
-            // Actualizar la lista de IDs de notas seleccionadas desde Firebase
+            nota.IsSeleccionada = !nota.IsSeleccionada;
+
             await ObtenerIdsNotasSeleccionadas();
         }
         private async Task ObtenerIdsNotasSeleccionadas()
         {
-            // Obtener las IDs de las notas seleccionadas desde Firebase
             var idsNotasSeleccionadas = NotasSeleccionadas.Select(nota => nota.IdNota).ToList();
-
-            // Puedes hacer lo que necesites con las IDs, como imprimir en la consola o realizar otras operaciones
             Console.WriteLine("IDs de Notas Seleccionadas: " + string.Join(", ", idsNotasSeleccionadas));
         }
 
@@ -94,8 +89,9 @@ namespace AppNotas_DLL.ViewModels.VMnota
                 await funcion.EliminarNota(nota);
             }
 
-            await MostrarNota(); // Actualizar la lista después de eliminar
-            NotasSeleccionadas.Clear(); // Limpiar la lista de notas seleccionadas
+            await MostrarNota(); 
+            NotasSeleccionadas.Clear();
+            NotasBorradasCorrectamente?.Invoke(this, "Nota(s) borrada(s) correctamente");
         }
         public async Task IraAgregar() 
         {

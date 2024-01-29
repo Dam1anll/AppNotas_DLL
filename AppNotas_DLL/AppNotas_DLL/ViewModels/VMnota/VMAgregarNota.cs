@@ -16,6 +16,7 @@ namespace AppNotas_DLL.ViewModels.VMnota
         #region VARIABLES
         private string _txtTitulo;
         private string _txtTexto;
+        public event EventHandler<string> NotaAgregadaCorrectamente;
         #endregion
         #region CONTRUCTOR
         public VMAgregarNota(INavigation navigation)
@@ -48,7 +49,8 @@ namespace AppNotas_DLL.ViewModels.VMnota
             await funcion.AgregarNota(datos);
             await Volver();
             MessagingCenter.Send(this, "NotasActualizadas");
-            
+            NotaAgregadaCorrectamente?.Invoke(this, "Nota Agregada correctamente");
+
         }
         public async Task Volver() 
         {

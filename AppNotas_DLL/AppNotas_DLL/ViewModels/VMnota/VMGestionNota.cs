@@ -17,6 +17,8 @@ namespace AppNotas_DLL.ViewModels.VMnota
         #region VARIABLES
         private string _txtTitulo;
         private string _txtTexto;
+        public event EventHandler<string> NotaBorradaCorrectamente;
+        public event EventHandler<string> NotaEditadaCorrectamente;
         public NotaModelo _nota { get; set; }
         #endregion
         #region CONTRUCTOR 
@@ -51,6 +53,7 @@ namespace AppNotas_DLL.ViewModels.VMnota
             await funcion.EditarNota(datos);
             await Volver();
             MessagingCenter.Send(this, "NotasActualizadas");
+            NotaEditadaCorrectamente?.Invoke(this, "Nota editada correctamente");
         }
 
         public async Task Eliminar()
@@ -59,7 +62,8 @@ namespace AppNotas_DLL.ViewModels.VMnota
             await funcion.EliminarNota(_nota);
             await Volver();
             MessagingCenter.Send(this, "NotasActualizadas");
-            
+            NotaBorradaCorrectamente?.Invoke(this, "Nota borrada correctamente");
+
         }
 
         public async Task Volver() 

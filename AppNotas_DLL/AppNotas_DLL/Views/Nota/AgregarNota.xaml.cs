@@ -17,6 +17,16 @@ namespace AppNotas_DLL.Views.Nota
         {
             InitializeComponent();
             BindingContext = new VMAgregarNota(Navigation);
+            var viewModel = new VMAgregarNota(Navigation);
+            viewModel.NotaAgregadaCorrectamente += (sender, mensaje) =>
+            {
+                MostrarMensaje(mensaje);
+            };
+            BindingContext = viewModel;
+        }
+        private async void MostrarMensaje(string mensaje)
+        {
+            await DisplayAlert("Mensaje", mensaje, "Aceptar");
         }
         private void MaxText(object sender, TextChangedEventArgs e)
         {

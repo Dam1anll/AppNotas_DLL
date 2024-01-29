@@ -18,6 +18,17 @@ namespace AppNotas_DLL.Views.Nota
         {
             InitializeComponent();
             BindingContext = new VMListaNota(Navigation);
+            var viewModel = new VMListaNota(Navigation);
+            viewModel.NotasBorradasCorrectamente += (sender, mensaje) =>
+            {
+                MostrarMensaje(mensaje);
+            };
+            BindingContext = viewModel;
+        }
+
+        private async void MostrarMensaje(string mensaje)
+        {
+            await DisplayAlert("Mensaje", mensaje, "Aceptar");
         }
     }
 }
