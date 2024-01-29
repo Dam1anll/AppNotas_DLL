@@ -42,18 +42,30 @@ namespace AppNotas_DLL.ViewModels.VMnota
 
         #endregion
         #region PROCESOS
-        public async Task Editar() 
+        public async Task Editar()
         {
             var funcion = new NotaDatos();
-            var datos = new NotaModelo();
-            datos.IdNota = _nota.IdNota;
-            datos.Titulo = TxtTitulo;
-            datos.Texto = TxtTexto;
+            var nuevosDatos = new NotaModelo();
+            nuevosDatos.IdNota = _nota.IdNota;
+            nuevosDatos.Titulo = TxtTitulo;
+            nuevosDatos.Texto = TxtTexto;
 
-            await funcion.EditarNota(datos);
-            await Volver();
-            MessagingCenter.Send(this, "NotasActualizadas");
-            NotaEditadaCorrectamente?.Invoke(this, "Nota editada correctamente");
+            if (DatosEditados(nuevosDatos))
+            {
+                await funcion.EditarNota(nuevosDatos);
+                await Volver();
+                MessagingCenter.Send(this, "NotasActualizadas");
+                NotaEditadaCorrectamente?.Invoke(this, "Nota editada correctamente");
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Advertencia", "Realiza cambios antes de editar la nota.", "OK");
+            }
+        }
+
+        private bool DatosEditados(NotaModelo nuevosDatos)
+        {
+            return _nota.IdNota != nuevosDatos.IdNota || _nota.Titulo != nuevosDatos.Titulo || _nota.Texto != nuevosDatos.Texto;
         }
 
         public async Task Eliminar()

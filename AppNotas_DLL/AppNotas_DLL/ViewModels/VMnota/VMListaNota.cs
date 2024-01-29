@@ -79,6 +79,12 @@ namespace AppNotas_DLL.ViewModels.VMnota
 
         private async Task EliminarNotasSeleccionadas()
         {
+            if (NotasSeleccionadas.Count == 0)
+            {
+                await Application.Current.MainPage.DisplayAlert("Aviso", "Selecciona al menos una nota para eliminar.", "OK");
+                return;
+            }
+
             var funcion = new NotaDatos();
 
             foreach (var nota in NotasSeleccionadas)
@@ -86,7 +92,7 @@ namespace AppNotas_DLL.ViewModels.VMnota
                 await funcion.EliminarNota(nota);
             }
 
-            await MostrarNota(); 
+            await MostrarNota();
             NotasSeleccionadas.Clear();
             NotasBorradasCorrectamente?.Invoke(this, "Nota(s) borrada(s) correctamente");
         }

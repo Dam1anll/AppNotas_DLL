@@ -39,8 +39,14 @@ namespace AppNotas_DLL.ViewModels.VMnota
 
         #endregion
         #region PROCESOS
-        public async Task Agregar() 
+        public async Task Agregar()
         {
+            if (string.IsNullOrEmpty(TxtTitulo) || string.IsNullOrEmpty(TxtTexto))
+            {
+                await Application.Current.MainPage.DisplayAlert("Advertencia", "Ingresa el título y el texto de la nota.", "OK");
+                return;
+            }
+
             var funcion = new NotaDatos();
             var datos = new NotaModelo();
             datos.Titulo = TxtTitulo;
@@ -49,7 +55,6 @@ namespace AppNotas_DLL.ViewModels.VMnota
             await funcion.AgregarNota(datos);
             await Volver();
             NotaAgregadaCorrectamente?.Invoke(this, "Nota Agregada correctamente");
-
         }
         public async Task Volver() 
         {
