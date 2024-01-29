@@ -30,6 +30,10 @@ namespace AppNotas_DLL.ViewModels.VMnota
             {
                 MostrarNota();
             });
+            MessagingCenter.Subscribe<VMAgregarNota>(this, "NotasActualizadas", (sender) =>
+            {
+                MostrarNota();
+            });
         }
         #endregion
         #region OBJETOS
