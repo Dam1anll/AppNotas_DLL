@@ -56,8 +56,6 @@ namespace AppNotas_DLL.ViewModels.VMnota
         {
             var funcion = new NotaDatos();
             ListaNota = await funcion.MostrarNota();
-
-           
         }
         private async Task SeleccionarNota(NotaModelo nota)
         {
@@ -77,7 +75,6 @@ namespace AppNotas_DLL.ViewModels.VMnota
         private async Task ObtenerIdsNotasSeleccionadas()
         {
             var idsNotasSeleccionadas = NotasSeleccionadas.Select(nota => nota.IdNota).ToList();
-            Console.WriteLine("IDs de Notas Seleccionadas: " + string.Join(", ", idsNotasSeleccionadas));
         }
 
         private async Task EliminarNotasSeleccionadas()

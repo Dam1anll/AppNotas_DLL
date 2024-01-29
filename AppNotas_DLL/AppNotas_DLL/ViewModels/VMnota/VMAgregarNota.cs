@@ -48,7 +48,6 @@ namespace AppNotas_DLL.ViewModels.VMnota
 
             await funcion.AgregarNota(datos);
             await Volver();
-            MessagingCenter.Send(this, "NotasActualizadas");
             NotaAgregadaCorrectamente?.Invoke(this, "Nota Agregada correctamente");
 
         }

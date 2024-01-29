@@ -3,73 +3,68 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppNotas_DLL.Views.Nota.GestionNota"
              NavigationPage.HasNavigationBar="False">
-    
-    <Grid RowDefinitions="80,*"
-          BackgroundColor="#000000">
+
+    <Grid RowDefinitions="80,*" BackgroundColor="#000000">
         <StackLayout Orientation="Horizontal" Padding="15,0,0,0" BackgroundColor="#0A0A0A">
             <Image Source="https://i.ibb.co/t3vDfms/flecha-izquierda.png" WidthRequest="30">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding VolverCommand}"/>
                 </Image.GestureRecognizers>
-
             </Image>
             <Label Text="NOTAS"
-                Margin="60,0,0,0"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                FontSize="40"
-                FontAttributes="Bold"
-                TextColor="White"/>
-
+               Margin="20,0,0,0"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="36"
+               FontAttributes="Bold"
+               TextColor="White"/>
         </StackLayout>
-        <StackLayout Grid.Row="1" Margin="10">
-            <StackLayout Orientation="Horizontal">
+        <StackLayout Grid.Row="1" Margin="20">
+            <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
                 <Label Text="Titulo: "
-                       TextColor="White"
-                       FontAttributes="Bold"
-                       VerticalOptions="Center"
-                       FontSize="18"/>
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   FontSize="18"/>
                 <Entry Placeholder="Ingrese el titulo"
-                       FontAttributes="Bold"
-                       TextColor="White"
-                       PlaceholderColor="White"
-                       HorizontalOptions="StartAndExpand"
-                       Text="{Binding _nota.Titulo}"/>
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   PlaceholderColor="Gray"
+                   HorizontalOptions="FillAndExpand"
+                   Text="{Binding _nota.Titulo}"/>
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
                 <Label Text="Texto: "
-                       TextColor="White"
-                       FontAttributes="Bold"
-                       VerticalOptions="Center"
-                       FontSize="18"/>
-                <Editor Placeholder="Ingrese una descripcion"
-                            FontAttributes="Bold"
-                            x:Name="miEditor"
-                            TextColor="White"
-                            PlaceholderColor="White"
-                            VerticalOptions="StartAndExpand"
-                            HorizontalOptions="FillAndExpand" 
-                            AutoSize="TextChanges"
-                            Text="{Binding _nota.Texto}"
-                            TextChanged="MaxText"/>
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   FontSize="18"/>
+                <Editor Placeholder="Ingrese una descripción"
+                    FontAttributes="Bold"
+                    x:Name="miEditor"
+                    TextColor="White"
+                    PlaceholderColor="Gray"
+                    VerticalOptions="StartAndExpand"
+                    HorizontalOptions="FillAndExpand" 
+                    AutoSize="TextChanges"
+                    Text="{Binding _nota.Texto}"
+                    TextChanged="MaxText"/>
             </StackLayout>
             <StackLayout Margin="0,10,0,0" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button
-                    Text="Eliminar"
+                <Button Text="Eliminar"
                     HorizontalOptions="Center"
-                    BackgroundColor="#307AF7"
+                    BackgroundColor="#FF3B30"
                     CornerRadius="15"
-                    FontSize="15"
+                    FontSize="16"
                     WidthRequest="130"
-                    HeightRequest="60"
+                    HeightRequest="50"
                     Margin="0,0,10,0"
                     Command="{Binding EliminarCommand}"/>
-                <Button
-                    Text="Editar"
+                <Button Text="Editar"
                     HorizontalOptions="Center"
                     BackgroundColor="#307AF7"
                     CornerRadius="15"
-                    FontSize="15"
+                    FontSize="16"
                     WidthRequest="130"
                     HeightRequest="50"
                     Command="{Binding EditarCommand}"/>
